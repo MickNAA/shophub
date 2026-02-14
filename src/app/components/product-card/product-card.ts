@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -10,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductCard {
   @Input() product: any = {
+    id: 0,
     name: 'Sample Product',
     description: 'Product description',
     price: 0,
@@ -18,8 +20,14 @@ export class ProductCard {
 
   @Output() addToCart = new EventEmitter<any>();
 
+  constructor(private router: Router){}
+
   onAddToCart() {
     this.addToCart.emit(this.product);
     console.log('Added to cart:', this.product.name);
+  }
+
+  onProductClick(){
+    this.router.navigate(['/product', this.product.id]);
   }
 }
