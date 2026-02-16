@@ -39,4 +39,8 @@ export class CartComponent implements OnInit {
   continueShopping() {
     this.router.navigate(['/']);
   }
+
+  proceedToCheckout() {
+    this.router.navigate(['/checkout']);
+  }
 }

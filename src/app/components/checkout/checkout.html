@@ -1,0 +1,310 @@
+<div class="min-h-screen bg-gray-50 py-8 px-4">
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="mb-8">
+      <button 
+        (click)="goBack()"
+        class="flex items-center text-indigo-600 hover:text-indigo-700 mb-4 transition-colors font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Cart
+      </button>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Checkout</h1>
+      <p class="text-gray-600">Complete your order</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <div class="lg:col-span-2">
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">Customer Information</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  First Name *
+                </label>
+                <input 
+                  type="text" 
+                  formControlName="firstName"
+                  [class.border-red-500]="isFieldInvalid('firstName')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="John"
+                />
+                <p *ngIf="isFieldInvalid('firstName')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('firstName') }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name *
+                </label>
+                <input 
+                  type="text" 
+                  formControlName="lastName"
+                  [class.border-red-500]="isFieldInvalid('lastName')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="Doe"
+                />
+                <p *ngIf="isFieldInvalid('lastName')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('lastName') }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Email *
+                </label>
+                <input 
+                  type="email" 
+                  formControlName="email"
+                  [class.border-red-500]="isFieldInvalid('email')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="john@example.com"
+                />
+                <p *ngIf="isFieldInvalid('email')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('email') }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Phone *
+                </label>
+                <input 
+                  type="tel" 
+                  formControlName="phone"
+                  [class.border-red-500]="isFieldInvalid('phone')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="1234567890"
+                />
+                <p *ngIf="isFieldInvalid('phone')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('phone') }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">Shipping Address</h2>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Street Address *
+                </label>
+                <input 
+                  type="text" 
+                  formControlName="address"
+                  [class.border-red-500]="isFieldInvalid('address')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="123 Main Street"
+                />
+                <p *ngIf="isFieldInvalid('address')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('address') }}
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    City *
+                  </label>
+                  <input 
+                    type="text" 
+                    formControlName="city"
+                    [class.border-red-500]="isFieldInvalid('city')"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="New York"
+                  />
+                  <p *ngIf="isFieldInvalid('city')" class="text-red-500 text-sm mt-1">
+                    {{ getErrorMessage('city') }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    State *
+                  </label>
+                  <input 
+                    type="text" 
+                    formControlName="state"
+                    [class.border-red-500]="isFieldInvalid('state')"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="NY"
+                  />
+                  <p *ngIf="isFieldInvalid('state')" class="text-red-500 text-sm mt-1">
+                    {{ getErrorMessage('state') }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    ZIP Code *
+                  </label>
+                  <input 
+                    type="text" 
+                    formControlName="zipCode"
+                    [class.border-red-500]="isFieldInvalid('zipCode')"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="10001"
+                  />
+                  <p *ngIf="isFieldInvalid('zipCode')" class="text-red-500 text-sm mt-1">
+                    {{ getErrorMessage('zipCode') }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">Payment Information</h2>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Card Number *
+                </label>
+                <input 
+                  type="text" 
+                  formControlName="cardNumber"
+                  [class.border-red-500]="isFieldInvalid('cardNumber')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="1234567890123456"
+                  maxlength="16"
+                />
+                <p *ngIf="isFieldInvalid('cardNumber')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('cardNumber') }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Name on Card *
+                </label>
+                <input 
+                  type="text" 
+                  formControlName="cardName"
+                  [class.border-red-500]="isFieldInvalid('cardName')"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="John Doe"
+                />
+                <p *ngIf="isFieldInvalid('cardName')" class="text-red-500 text-sm mt-1">
+                  {{ getErrorMessage('cardName') }}
+                </p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Expiry Date *
+                  </label>
+                  <input 
+                    type="text" 
+                    formControlName="expiryDate"
+                    [class.border-red-500]="isFieldInvalid('expiryDate')"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="MM/YY"
+                    maxlength="5"
+                  />
+                  <p *ngIf="isFieldInvalid('expiryDate')" class="text-red-500 text-sm mt-1">
+                    {{ getErrorMessage('expiryDate') }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    CVV *
+                  </label>
+                  <input 
+                    type="text" 
+                    formControlName="cvv"
+                    [class.border-red-500]="isFieldInvalid('cvv')"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="123"
+                    maxlength="4"
+                  />
+                  <p *ngIf="isFieldInvalid('cvv')" class="text-red-500 text-sm mt-1">
+                    {{ getErrorMessage('cvv') }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            type="submit"
+            [disabled]="isSubmitting"
+            class="w-full bg-indigo-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-indigo-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+            <span *ngIf="!isSubmitting">Place Order - ${{ totalPrice.toFixed(2) }}</span>
+            <span *ngIf="isSubmitting" class="flex items-center justify-center">
+              <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Processing...
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-6 sticky top-20">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-6">Order Summary</h2>
+          
+          <div class="space-y-4 mb-6">
+            <div *ngFor="let item of cartItems" class="flex items-center gap-4 pb-4 border-b border-gray-200">
+              <img 
+                [src]="item.image" 
+                [alt]="item.name"
+                class="w-16 h-16 object-cover rounded"
+              />
+              <div class="flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm">{{ item.name }}</h3>
+                <p class="text-gray-600 text-sm">Qty: {{ item.quantity }}</p>
+              </div>
+              <p class="font-semibold text-gray-900">
+                ${{ (item.price * item.quantity).toFixed(2) }}
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-2 mb-6">
+            <div class="flex justify-between text-gray-600">
+              <span>Subtotal:</span>
+              <span>${{ totalPrice.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Shipping:</span>
+              <span class="text-green-600 font-semibold">FREE</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Tax:</span>
+              <span>${{ (totalPrice * 0.08).toFixed(2) }}</span>
+            </div>
+            <div class="border-t border-gray-200 pt-2 mt-2">
+              <div class="flex justify-between text-xl font-bold text-gray-900">
+                <span>Total:</span>
+                <span>${{ (totalPrice * 1.08).toFixed(2) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div class="flex items-center text-green-800">
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm font-semibold">Secure Checkout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
